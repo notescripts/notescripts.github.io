@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{font-family:Arial,sans-serif}.Container{text-align:center}#nicknameInput{outline:0;padding:5px;margin:10px 10px 10px 2px}#colorPicker{margin:10px}.nameaction button{display:inline-block;margin:10px 5px}#addname,#copycodename,#deletename,#textfree{display:none}#output{height:25px;margin-top:10px;border-bottom:2px solid green}#output p,.todoAction p{display:inline;margin:0;padding:0}#todoList{max-width:400px;margin:20px auto}ul{list-style-type:none;padding:0}li{margin:5px 0;padding:10px;border:1px solid #ccc;background-color:#f8f8f8;display:flex;justify-content:space-between}.todolist{max-width:400px;height:400px;border:1.5px solid green;overflow-y:auto}.todoAction button{margin-left:5px}#color{margin-bottom:10px}#textboxfree{outline:0}
+    </style>
+    <title>TenMauLQM</title>
+</head>
+<body>
+    <div class="Container">
+    <h1>Đổi tên màu liên quân</h1>
+       <label for="nicknameInput">Nhập tên</label>
+       <input type="text" id="nicknameInput">
+       <br>
+       <label for="color">Chọn màu chữ</label>
+    <input type="color" id="color"><br>
+    <label for="boldCheckbox"><b>Chữ đậm</b></label>
+       <input type="checkbox" id="boldCheckbox">
+       <label for="italicCheckbox"><i>Chữ nghiêng</i></label>
+       <input type="checkbox" id="italicCheckbox">
+    <div class="nameaction">
+        <button id="addname" onclick="addNickname()">Thêm</button>
+        <button id="deletename" onclick="deleteName()">Xoá</button>
+        <button id="copycodename" onclick="copyName()">Copy tên&code</button>
+    </div>      
+   <div id="output"></div>
+   <div id="todoList">
+       <h2>Ds Tên đã tạo</h2>
+          <div class="todolist">
+          <ul id="tasks"></ul>
+          </div>
+   </div>
+   </div> 
+    <script>
+        document.getElementById("nicknameInput").addEventListener("blur",function(){document.getElementById("addname").style.display="inline-block"});var outputDivInner,outputDiv=document.getElementById("output"),codeName="",boldTag="",italicTag="",cBoldTag="",cItalicTag="";function addNickname(){var e=document.getElementById("nicknameInput");if(e.value)if(e.value.match(/\s/g))alert("Tên không được cách!");else{document.getElementById("deletename").style.display="inline-block",document.getElementById("copycodename").style.display="inline-block";var t=document.getElementById("color").value;shortColor="#"+t[1]+t[3]+t[5],shortColor=shortColor.replace(/0/g,"1");var n=document.getElementById("boldCheckbox").checked,a=document.getElementById("italicCheckbox").checked;outputDivInner=`<p style="color: ${t}; ${boldTag=n?"font-weight: bold;":""} ${italicTag=a?"font-style: italic;":""}">${e.value}</p>`,outputDiv.innerHTML+=outputDivInner,codeName+=`<color=${shortColor}>${e.value}</a>`,e.value="",document.getElementById("color").value="#000000".replace(/0/g,function(){return(~~(16*Math.random())).toString(16)})}else alert("Hãy nhập một cái tên!")}function deleteName(){codeName="",document.getElementById("deletename").style.display="none",document.getElementById("copycodename").style.display="none",document.getElementById("output").innerHTML=""}var nameCode="";function copyName(){var e=document.getElementById("boldCheckbox").checked,t=document.getElementById("italicCheckbox").checked;if(boldTag=e?"<b>":"",italicTag=t?"<i>":"",cBoldTag=e?"</b>":"",cItalicTag=t?"</i>":"",(nameCode=document.createElement("textarea")).id="namecode",nameCode.value=boldTag+italicTag+codeName+cItalicTag+cBoldTag,nameCode.value.length>60)alert("Đặt tên thất bại!\nBao gồm cả code chữ và tên, độ dài tối đa 60 ký tự!");else{document.body.appendChild(nameCode);var n=JSON.parse(localStorage.getItem("tasks"))||[],a={code:nameCode.value,text:outputDiv.innerHTML};n.push(a),localStorage.setItem("tasks",JSON.stringify(n)),displayTasks();var o=document.getElementById("namecode");o.select(),o.setSelectionRange(0,99999),navigator.clipboard.writeText(o.value),alert(`Đã copy tên và code, tổng số ký tự: ${nameCode.value.length}`),document.body.removeChild(nameCode)}}function displayTasks(){var e=document.getElementById("tasks"),t=JSON.parse(localStorage.getItem("tasks"))||[];e.innerHTML="",t.forEach(function(t,n){var a=document.createElement("li");a.innerHTML=`<div class="todoAction">\n                            ${t.text}\n                            <input type="hidden" value="${t.code}">\n                            <button onclick="copyTask(this)">Sao chép</button>\n                            <button onclick="deleteTask(${n})">Xoá</button>\n                            </div>`,e.appendChild(a)})}function copyTask(e){var t=e.parentNode.querySelector("input");t.type="text",t.select(),t.setSelectionRange(0,99999),navigator.clipboard.writeText(t.value),t.type="hidden",alert(`Đã copy tên và code, tổng số ký tự: ${t.value.length}`)}function deleteTask(e){var t=JSON.parse(localStorage.getItem("tasks"))||[];t.splice(e,1),localStorage.setItem("tasks",JSON.stringify(t)),displayTasks()}displayTasks();
+    </script>
+
+</body>
+</html>
