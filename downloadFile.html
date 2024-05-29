@@ -16,7 +16,7 @@
         <i><p>www.youtube.com/@ChicoBone<p><i>
     </div>
     <script>
-    	function rd(e){let t="";const n="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",o=n.length;let d=0;for(;d<e;)t+=n.charAt(Math.floor(Math.random()*o)),d+=1;return t}function df(e,t){fetch(e).then(e=>e.blob()).then(e=>{const n=window.URL.createObjectURL(e),o=document.createElement("a");o.style.display="none",o.href=n,o.download=t,document.body.appendChild(o),o.click(),window.URL.revokeObjectURL(n)}).catch(()=>console.log("??f"))}document.addEventListener("DOMContentLoaded",()=>{window.history.pushState("","","/files/"+rd(10)),document.getElementById("downloadlink").addEventListener("click",e=>{e.preventDefault(),df(atob("c2NyaXB0YmJxLmx1YQ=="),atob("U2NyaXB0X0JhckJhclFfVklQX09mZmljaWFsX0JvbmUubHVh"))})});
+    	function rd(e){let t="";const n="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",o=n.length;let d=0;for(;d<e;)t+=n.charAt(Math.floor(Math.random()*o)),d+=1;return t}function df(e,t){fetch(e).then(e=>e.blob()).then(e=>{const n=window.URL.createObjectURL(e),o=document.createElement("a");o.style.display="none",o.href=n,o.download=t,document.body.appendChild(o),o.click(),window.URL.revokeObjectURL(n)}).catch(()=>console.log("??f"))}document.addEventListener("DOMContentLoaded",()=>{window.history.pushState("","","/"+rd(10)),document.getElementById("downloadlink").addEventListener("click",e=>{e.preventDefault(),df(atob("c2NyaXB0YmJxLmx1YQ=="),atob("U2NyaXB0X0JhckJhclFfVklQX09mZmljaWFsX0JvbmUubHVh"))})});
     </script>
 </body>
 </html>
